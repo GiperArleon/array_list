@@ -18,14 +18,14 @@ public class ExtArrayList<Type> implements ExtList<Type> {
 
     @Override
     public Type get(int index) {
-        if(index<0 || index>=currentPosition)
+        if(index < 0 || index >= currentPosition)
             return null;
         return buffer[index];
     }
 
     @Override
     public Type delete(int index) {
-        if(index<0 || index>=currentPosition)
+        if(index < 0 || index >= currentPosition)
             return null;
 
         Type element = buffer[index];
@@ -34,12 +34,13 @@ public class ExtArrayList<Type> implements ExtList<Type> {
         if(index == currentPosition) {
             buffer[currentPosition] = null;
         } else {
-            System.arraycopy(buffer, index+1, buffer, index, currentPosition-index);
+            System.arraycopy(buffer, index + 1, buffer, index, currentPosition - index);
         }
 
-        int decriseSize = buffer.length>>1;
-        if(currentPosition < decriseSize)
+        int decriseSize = buffer.length / 2;
+        if(currentPosition < decriseSize) {
             decriseBuffSize(decriseSize);
+        }
 
         return element;
     }
@@ -51,7 +52,10 @@ public class ExtArrayList<Type> implements ExtList<Type> {
 
     @Override
     public void clearAll() {
-
+        for(int i = 0; i < currentPosition; i++) {
+            buffer[i] = null;
+        }
+        currentPosition = 0;
     }
 
     @Override
@@ -62,7 +66,7 @@ public class ExtArrayList<Type> implements ExtList<Type> {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for(int i = 0; i<currentPosition; i++) {
+        for(int i = 0; i < currentPosition; i++) {
             stringBuilder.append(buffer[i]);
             stringBuilder.append(' ');
         }
@@ -70,7 +74,7 @@ public class ExtArrayList<Type> implements ExtList<Type> {
     }
 
     private void increaseBuffSize() {
-        Type[] newBuffer = (Type[]) new Object[currentPosition + currentPosition/2];
+        Type[] newBuffer = (Type[]) new Object[currentPosition + currentPosition / 2];
         System.arraycopy(buffer, 0, newBuffer, 0, buffer.length);
         buffer = newBuffer;
     }
