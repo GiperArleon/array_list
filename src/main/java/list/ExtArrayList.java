@@ -6,6 +6,7 @@ import sort.QuickSortJen;
  * Реализации коллекции ArrayList.
  * Все методы не являются потокобезопастными.
  * Элементы коллекции должны имплементировать интерфейс Comparable для возможности сортировки.
+ * @author Артем Барышников
  */
 @SuppressWarnings("unchecked")
 public class ExtArrayList<Type extends Comparable<Type>> implements ExtList<Type> {

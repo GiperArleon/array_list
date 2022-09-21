@@ -3,6 +3,7 @@ package list;
 /**
  * Интерфейс собственной реализации ArrayList.
  * Элементы коллекции должны имплементировать интерфейс Comparable для возможности сортировки.
+ * @author Артем Барышников
  */
 public interface ExtList<Type extends Comparable<Type>> {
     /**
