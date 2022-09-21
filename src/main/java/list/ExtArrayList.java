@@ -1,11 +1,13 @@
 package list;
 
+import sort.QuickSortJen;
 @SuppressWarnings("unchecked")
-public class ExtArrayList<Type> implements ExtList<Type> {
+public class ExtArrayList<Type extends Comparable<Type>> implements ExtList<Type> {
 
     private static final int START_SIZE = 100;
     private int currentPosition = 0;
-    private Type[] buffer = (Type[]) new Object[START_SIZE];
+    private Type[] buffer = (Type[]) new Comparable[START_SIZE];
+    QuickSortJen<Type> quickSortJen = new QuickSortJen<>();
 
     @Override
     public boolean add(Type element) {
@@ -41,7 +43,6 @@ public class ExtArrayList<Type> implements ExtList<Type> {
         if(currentPosition < decriseSize) {
             decriseBuffSize(decriseSize);
         }
-
         return element;
     }
 
@@ -59,8 +60,8 @@ public class ExtArrayList<Type> implements ExtList<Type> {
     }
 
     @Override
-    public ExtList<Type> sort() {
-        return null;
+    public void sort() {
+        quickSortJen.sort(buffer);
     }
 
     @Override
@@ -74,13 +75,13 @@ public class ExtArrayList<Type> implements ExtList<Type> {
     }
 
     private void increaseBuffSize() {
-        Type[] newBuffer = (Type[]) new Object[currentPosition + currentPosition / 2];
+        Type[] newBuffer = (Type[]) new Comparable[currentPosition + currentPosition / 2];
         System.arraycopy(buffer, 0, newBuffer, 0, buffer.length);
         buffer = newBuffer;
     }
 
     private void decriseBuffSize(int newSize) {
-        Type[] newBuffer = (Type[]) new Object[newSize];
+        Type[] newBuffer = (Type[]) new Comparable[newSize];
         System.arraycopy(buffer, 0, newBuffer, 0, newSize);
         buffer = newBuffer;
     }
