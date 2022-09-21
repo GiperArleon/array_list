@@ -1,14 +1,27 @@
 package list;
 
 import sort.QuickSortJen;
+
+/**
+ * Реализации коллекции ArrayList.
+ * Все методы не являются потокобезопастными.
+ * Элементы коллекции должны имплементировать интерфейс Comparable для возможности сортировки.
+ */
 @SuppressWarnings("unchecked")
 public class ExtArrayList<Type extends Comparable<Type>> implements ExtList<Type> {
 
     private static final int START_SIZE = 100;
     private int currentPosition = 0;
     private Type[] buffer = (Type[]) new Comparable[START_SIZE];
-    QuickSortJen<Type> quickSortJen = new QuickSortJen<>();
+    private final QuickSortJen<Type> quickSortJen = new QuickSortJen<>();
 
+    /**
+     * Добавить элемент в коллекцию.
+     * Допускается добавление null.
+     * Динамически увеличивает размер буфера на 50% от его текущего размера при необходимости.
+     * @param element элемент который нужно добавить.
+     * @return {@code true} если элемент успешно добавлен.
+     */
     @Override
     public boolean add(Type element) {
         if(currentPosition >= buffer.length)
@@ -18,6 +31,12 @@ public class ExtArrayList<Type extends Comparable<Type>> implements ExtList<Type
         return true;
     }
 
+    /**
+     * Получить элемент из коллекции по его индексу.
+     * Если индекс за границами массива возвращается null.
+     * @param index индекс элемента который нужно получить.
+     * @return элемент коллекции.
+     */
     @Override
     public Type get(int index) {
         if(index < 0 || index >= currentPosition)
@@ -25,6 +44,13 @@ public class ExtArrayList<Type extends Comparable<Type>> implements ExtList<Type
         return buffer[index];
     }
 
+    /**
+     * Удалить элемент из коллекции по его индексу.
+     * Если индекс за границами массива возвращается null.
+     * Динамически уменьшает размер буфера на 50% от его текущего размера при необходимости.
+     * @param index индекс элемента который нужно удалить.
+     * @return элемент удаленный из коллекции.
+     */
     @Override
     public Type delete(int index) {
         if(index < 0 || index >= currentPosition)
@@ -39,18 +65,25 @@ public class ExtArrayList<Type extends Comparable<Type>> implements ExtList<Type
             System.arraycopy(buffer, index + 1, buffer, index, currentPosition - index);
         }
 
-        int decriseSize = buffer.length / 2;
+        int decriseSize = buffer.length/2;
         if(currentPosition < decriseSize) {
             decriseBuffSize(decriseSize);
         }
         return element;
     }
 
+    /**
+     * Получить размер коллекции.
+     * @return размер коллекции.
+     */
     @Override
     public int size() {
         return currentPosition;
     }
 
+    /**
+     * Очистить коллекцию.
+     */
     @Override
     public void clearAll() {
         for(int i = 0; i < currentPosition; i++) {
@@ -59,11 +92,20 @@ public class ExtArrayList<Type extends Comparable<Type>> implements ExtList<Type
         currentPosition = 0;
     }
 
+    /**
+     * Отсортировать коллекцию.
+     * Сортируем алгоритмом QuickSort.
+     * Элементы коллекции должны имплементировать интерфейс Comparable.
+     */
     @Override
     public void sort() {
         quickSortJen.sort(buffer);
     }
 
+    /**
+     * Строковое представление коллекции.
+     * @return элементы коллекции в виде строки, размер коллекции и размер буфера коллекции.
+     */
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -75,7 +117,7 @@ public class ExtArrayList<Type extends Comparable<Type>> implements ExtList<Type
     }
 
     private void increaseBuffSize() {
-        Type[] newBuffer = (Type[]) new Comparable[currentPosition + currentPosition / 2];
+        Type[] newBuffer = (Type[]) new Comparable[currentPosition + currentPosition/2];
         System.arraycopy(buffer, 0, newBuffer, 0, buffer.length);
         buffer = newBuffer;
     }

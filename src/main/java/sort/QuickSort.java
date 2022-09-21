@@ -1,7 +1,15 @@
 package sort;
 
+/**
+ * Реализации алгоритма быстрой сортировки QuickSort для массивов типа int.
+ * Все методы не являются потокобезопастными.
+ */
 public class QuickSort {
 
+    /**
+     * Отсортировать переданный массив элементов.
+     * @param values массив элементов типа int.
+     */
     public static void sort(int[] values) {
         if(values.length > 1) {
             quickSort(values, 0, values.length-1);

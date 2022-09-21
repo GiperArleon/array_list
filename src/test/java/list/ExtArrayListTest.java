@@ -75,7 +75,6 @@ class ExtArrayListTest {
             val2 = expected.remove(i);
             assertEquals(val1, val2);
         }
-
         compareWithOriginalList(extList, expected);
     }
 
@@ -167,12 +166,10 @@ class ExtArrayListTest {
         log.info("expected: {}", expected);
         compareWithOriginalList(shapeList, expected);
 
-
         expected.sort(Comparator
                 .comparing(Shape::getName)
                 .thenComparing(Shape::getAngles)
-                .thenComparing(Shape::getColor)
-        );
+                .thenComparing(Shape::getColor));
         shapeList.sort();
 
         log.info("extList: {}", shapeList);
@@ -182,7 +179,6 @@ class ExtArrayListTest {
 
     private <T extends Comparable<T>> void compareWithOriginalList(ExtList<T> extList, List<T> expected) {
         assertEquals(extList.size(), expected.size());
-
         for(int i = 0; i<expected.size(); i++) {
             T val1 = extList.get(i);
             T val2 = expected.get(i);

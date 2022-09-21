@@ -29,7 +29,7 @@ public class DataProvider {
         Shape[] arr = new Shape[size];
         for(int i = 0; i < arr.length; i++) {
             String name = names[rd.nextInt(names.length - 1)];
-            arr[i] = new Shape(name, COLOR.randomCOLOR(), getAngles(name));
+            arr[i] = new Shape(name, COLOR.randomColor(), getAngles(name));
             rd.nextInt();
         }
         return arr;
@@ -40,7 +40,7 @@ public class DataProvider {
         Shape[] arr = new Shape[size];
         for(int i = 0; i < arr.length; i++) {
             String name = names[rd.nextInt(names.length - 1)];
-            arr[i] = new Shape(name, COLOR.randomCOLOR(), rd.nextInt(10));
+            arr[i] = new Shape(name, COLOR.randomColor(), rd.nextInt(10));
             rd.nextInt();
         }
         return arr;

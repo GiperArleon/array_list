@@ -1,7 +1,16 @@
 package sort;
 
+/**
+ * Реализации алгоритма быстрой сортировки QuickSort для элементов произвольного типа.
+ * Все методы не являются потокобезопастными.
+ * Элементы сортируемого массива должны имплементировать интерфейс Comparable.
+ */
 public class QuickSortJen<Type extends Comparable<Type>> {
 
+    /**
+     * Отсортировать переданный массив элементов.
+     * @param values массив элементов произвольного типа.
+     */
     public void sort(Type[] values) {
         if(values.length > 1) {
             quickSort(values, 0, values.length-1);
