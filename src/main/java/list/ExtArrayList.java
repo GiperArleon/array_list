@@ -16,6 +16,14 @@ public class ExtArrayList<Type extends Comparable<Type>> implements ExtList<Type
     private Type[] buffer = (Type[]) new Comparable[START_SIZE];
     private final QuickSortJen<Type> quickSortJen = new QuickSortJen<>();
 
+    public void feature2() {
+
+    }
+
+    public void feature3() {
+
+    }
+
     public void bufgix1() {
 
     }
